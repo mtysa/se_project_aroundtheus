@@ -18,9 +18,3 @@
   min-height: 100vh;
   margin: 0;
 }
-
-@media screen and (max-width: 320px) {
-  .page__content {
-    padding: 0;
-  }
-}
