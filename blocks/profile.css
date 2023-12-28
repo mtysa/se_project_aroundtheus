@@ -75,7 +75,6 @@
   box-sizing: border-box;
   transition: 0.3s linear;
   cursor: pointer;
-  border-radius: 2px;
 }
 
 .profile__add-button:hover {
