@@ -1,11 +1,11 @@
 .header {
-  margin: 45px auto 0;
-  max-width: 880px;
+  margin-top: 45px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  padding-bottom: 41px;
 }
 
 .header__logo {
-  padding-bottom: 40px;
+  flex-shrink: 0;
   width: 173px;
   height: 33px;
 }

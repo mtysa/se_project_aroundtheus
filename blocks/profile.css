@@ -94,6 +94,7 @@
     flex-wrap: wrap;
     padding: 20px 0 0;
     gap: 0;
+    max-width: 282px;
   }
 
   .profile__title {
@@ -113,6 +114,8 @@
     text-align: center;
     width: 100%;
     margin: 0 auto;
+    font-size: 14px;
+    line-height: 17px;
   }
 
   .profile__add-button {
