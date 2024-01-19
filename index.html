@@ -42,7 +42,7 @@
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
-            <li class="card">
+            <!-- <li class="card">
               <img
                 src="./images/yosemite.jpg"
                 alt="Yosemite Valley"
@@ -112,7 +112,7 @@
                 <h2 class="card__title">Lago di Braies</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
-            </li>
+            </li> -->
           </ul>
         </section>
       </main>
@@ -132,19 +132,31 @@
           <input
             type="text"
             class="modal__input"
+            id="profile-title-input"
             name="title"
             placeholder="Name"
           />
           <input
             type="text"
             class="modal__input"
+            id="profile-description-input"
             name="description"
             placeholder="Description"
           />
-          <button type="button" class="modal__button">Save</button>
+          <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="card-template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__content">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
