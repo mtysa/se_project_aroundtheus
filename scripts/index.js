@@ -48,7 +48,7 @@ const cardTemplate =
 //--------------------------------------------------------------------------------------//
 
 function closePopup() {
-  profileEditModal.classList.remove("modal__opened");
+  profileEditModal.classList.remove("modal_opened");
 }
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
@@ -65,6 +65,16 @@ function getCardElement(cardData) {
   // return the ready HTML element with the filled-in data
   return cardElement;
 }
+
+function fillProfileForm() {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+}
+
+function openEditProfileModal() {
+  fillProfileForm();
+  profileEditModal.classList.add("modal_opened");
+}
 //--------------------------------------------------------------------------------------//
 //                                    Event Handlers                                    //
 //--------------------------------------------------------------------------------------//
@@ -80,11 +90,7 @@ function handleProfileEditSubmit(e) {
 //                                   Event Listeners                                    //
 //--------------------------------------------------------------------------------------//
 
-profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal__opened");
-});
+profileEditButton.addEventListener("click", openEditProfileModal);
 
 profileCloseButton.addEventListener("click", closePopup);
 
