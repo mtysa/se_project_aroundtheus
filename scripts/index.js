@@ -86,6 +86,11 @@ function openEditProfileModal() {
 function openCardAddModal() {
   cardAddModal.classList.add("modal_opened");
 }
+
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
+  cardListEl.prepend(cardElement);
+}
 //--------------------------------------------------------------------------------------//
 //                                    Event Handlers                                    //
 //--------------------------------------------------------------------------------------//
@@ -94,6 +99,14 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
+  closePopup();
+}
+
+function handleCardAddSubmit(e) {
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardImageInput.value;
+  renderCard({ name, link }, cardListEl);
   closePopup();
 }
 
@@ -111,7 +124,6 @@ cardAddButton.addEventListener("click", openCardAddModal);
 
 cardCloseButton.addEventListener("click", closePopup);
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.append(cardElement);
-});
+cardAddForm.addEventListener("submit", handleCardAddSubmit);
+
+initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
