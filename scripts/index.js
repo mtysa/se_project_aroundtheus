@@ -63,6 +63,11 @@ function getCardElement(cardData) {
   // access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  // card like button
+  const cardLikeButton = cardElement.querySelector("#card-like-button");
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.toggle("card__like-button_active");
+  });
   // set the path to the image to the link field of the object
   cardImageEl.src = cardData.link;
   // set the image alt text to the name field of the object
@@ -125,5 +130,9 @@ cardAddButton.addEventListener("click", openCardAddModal);
 cardCloseButton.addEventListener("click", closePopup);
 
 cardAddForm.addEventListener("submit", handleCardAddSubmit);
+
+//--------------------------------------------------------------------------------------//
+//                                   Cards                                              //
+//--------------------------------------------------------------------------------------//
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
