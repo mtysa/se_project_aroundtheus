@@ -48,6 +48,10 @@ const cardAddForm = cardAddModal.querySelector("#card-add-form");
 const cardCloseButton = document.querySelector("#card-close-button");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardImageInput = document.querySelector("#card-image-input");
+const imagePreviewModal = document.querySelector("#image-preview-modal");
+const imageTitle = document.querySelector(".modal__image-title");
+const imageCloseButton = document.querySelector("#image-close-button");
+const imagePreview = document.querySelector(".modal__image");
 
 //--------------------------------------------------------------------------------------//
 //                                      Functions                                       //
@@ -70,6 +74,8 @@ function getCardElement(cardData) {
   // card delete button
   const cardDeleteButton = cardElement.querySelector("#card-delete-button");
   cardDeleteButton.addEventListener("click", () => cardElement.remove());
+  // image preview
+  cardImageEl.addEventListener("click", () => loadImagePreview(cardData));
   // set the path to the image to the link field of the object
   cardImageEl.src = cardData.link;
   // set the image alt text to the name field of the object
@@ -94,11 +100,21 @@ function openCardAddModal() {
   cardAddModal.classList.add("modal_opened");
 }
 
+function openImagePreviewModal() {
+  imagePreviewModal.classList.add("modal_opened");
+}
+
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
 }
 
+function loadImagePreview(previewData) {
+  imagePreview.src = previewData.link;
+  imageTitle.textContent = previewData.name;
+  imagePreview.alt = previewData.name;
+  openImagePreviewModal();
+}
 //--------------------------------------------------------------------------------------//
 //                                    Event Handlers                                    //
 //--------------------------------------------------------------------------------------//
@@ -115,6 +131,7 @@ function handleCardAddSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
   renderCard({ name, link }, cardListEl);
+  cardAddForm.reset();
   closePopup(cardAddModal);
 }
 
@@ -135,6 +152,8 @@ cardAddButton.addEventListener("click", openCardAddModal);
 cardCloseButton.addEventListener("click", () => closePopup(cardAddModal));
 
 cardAddForm.addEventListener("submit", handleCardAddSubmit);
+
+imageCloseButton.addEventListener("click", () => closePopup(imagePreviewModal));
 
 //--------------------------------------------------------------------------------------//
 //                                   Cards                                              //
