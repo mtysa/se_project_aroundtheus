@@ -60,6 +60,11 @@ const imagePreview = document.querySelector(".modal__image");
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
 }
+
+function openPopup(modal) {
+  modal.classList.add("modal_opened");
+}
+
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
@@ -91,19 +96,6 @@ function fillProfileForm() {
   profileDescriptionInput.value = profileDescription.textContent;
 }
 
-function openEditProfileModal() {
-  fillProfileForm();
-  profileEditModal.classList.add("modal_opened");
-}
-
-function openCardAddModal() {
-  cardAddModal.classList.add("modal_opened");
-}
-
-function openImagePreviewModal() {
-  imagePreviewModal.classList.add("modal_opened");
-}
-
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
@@ -113,7 +105,7 @@ function loadImagePreview(previewData) {
   imagePreview.src = previewData.link;
   imageTitle.textContent = previewData.name;
   imagePreview.alt = previewData.name;
-  openImagePreviewModal();
+  openPopup(imagePreviewModal);
 }
 //--------------------------------------------------------------------------------------//
 //                                    Event Handlers                                    //
@@ -139,7 +131,7 @@ function handleCardAddSubmit(e) {
 //                                   Event Listeners                                    //
 //--------------------------------------------------------------------------------------//
 
-profileEditButton.addEventListener("click", openEditProfileModal);
+profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
 
 profileCloseButton.addEventListener("click", () =>
   closePopup(profileEditModal)
@@ -147,7 +139,7 @@ profileCloseButton.addEventListener("click", () =>
 
 profileEditform.addEventListener("submit", handleProfileEditSubmit);
 
-cardAddButton.addEventListener("click", openCardAddModal);
+cardAddButton.addEventListener("click", () => openPopup(cardAddModal));
 
 cardCloseButton.addEventListener("click", () => closePopup(cardAddModal));
 
