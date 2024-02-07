@@ -96,6 +96,11 @@ function fillProfileForm() {
   profileDescriptionInput.value = profileDescription.textContent;
 }
 
+function openEditProfileModal() {
+  fillProfileForm();
+  openPopup(profileEditModal);
+}
+
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
@@ -131,7 +136,7 @@ function handleCardAddSubmit(e) {
 //                                   Event Listeners                                    //
 //--------------------------------------------------------------------------------------//
 
-profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
+profileEditButton.addEventListener("click", openEditProfileModal);
 
 profileCloseButton.addEventListener("click", () =>
   closePopup(profileEditModal)
