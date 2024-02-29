@@ -57,24 +57,46 @@
           id="profile-close-button"
         ></button>
         <h2 class="modal__heading">Edit profile</h2>
-        <form class="modal__form" id="profile-edit-form">
-          <input
-            type="text"
-            class="modal__input modal__input_type_name"
-            id="profile-title-input"
-            name="title"
-            placeholder="Name"
-            required
-          />
-          <input
-            type="text"
-            class="modal__input modal__input_type_description"
-            id="profile-description-input"
-            name="description"
-            placeholder="Description"
-            required
-          />
-          <button type="submit" class="modal__button">Save</button>
+        <form class="modal__form" id="profile-edit-form" novalidate>
+          <label for="profile-title-input" class="modal__label">
+            <input
+              type="text"
+              class="modal__input modal__input_type_name"
+              id="profile-title-input"
+              name="title"
+              placeholder="Name"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span
+              class="modal__span modal__input_type_error"
+              id="profile-title-input-error"
+            ></span>
+          </label>
+          <label for="profile-description-input" class="modal__label">
+            <input
+              type="text"
+              class="modal__input modal__input_type_description"
+              id="profile-description-input"
+              name="description"
+              placeholder="Description"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              class="modal__span modal__input_type_error"
+              id="profile-description-input-error"
+            ></span>
+          </label>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -87,24 +109,44 @@
           id="card-close-button"
         ></button>
         <h2 class="modal__heading">New Place</h2>
-        <form class="modal__form" id="card-add-form">
-          <input
-            type="text"
-            class="modal__input modal__input_type_title"
-            id="card-title-input"
-            name="title"
-            placeholder="Title"
-            required
-          />
-          <input
-            type="text"
-            class="modal__input modal__input_type_url"
-            id="card-image-input"
-            name="description"
-            placeholder="Image URL"
-            required
-          />
-          <button type="submit" class="modal__button">Save</button>
+        <form class="modal__form" id="card-add-form" novalidate>
+          <label for="card-title-input" class="modal__label">
+            <input
+              type="text"
+              class="modal__input modal__input_type_title"
+              id="card-title-input"
+              name="title"
+              placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
+            />
+            <span
+              class="modal__input_type_error"
+              id="card-title-input-error"
+            ></span>
+          </label>
+          <label for="card-image-input" class="modal__label">
+            <input
+              type="url"
+              class="modal__input modal__input_type_url"
+              id="card-image-input"
+              name="description"
+              placeholder="Image URL"
+              required
+            />
+            <span
+              class="modal__input_type_error"
+              id="card-image-input-error"
+            ></span>
+          </label>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -140,5 +182,6 @@
       </li>
     </template>
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>

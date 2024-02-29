@@ -132,6 +132,20 @@ function handleCardAddSubmit(e) {
   closePopup(cardAddModal);
 }
 
+function handleEscape(e) {
+  if (e.key === "Escape") {
+    closePopup(profileEditModal);
+    closePopup(cardAddModal);
+    closePopup(imagePreviewModal);
+  }
+}
+
+function handleAwayClick(e) {
+  if (e.target === e.currentTarget) {
+    closePopup(e.currentTarget);
+  }
+}
+
 //--------------------------------------------------------------------------------------//
 //                                   Event Listeners                                    //
 //--------------------------------------------------------------------------------------//
@@ -151,6 +165,14 @@ cardCloseButton.addEventListener("click", () => closePopup(cardAddModal));
 cardAddForm.addEventListener("submit", handleCardAddSubmit);
 
 imageCloseButton.addEventListener("click", () => closePopup(imagePreviewModal));
+
+document.addEventListener("keydown", handleEscape);
+
+profileEditModal.addEventListener("mousedown", handleAwayClick);
+
+cardAddModal.addEventListener("mousedown", handleAwayClick);
+
+imagePreviewModal.addEventListener("mousedown", handleAwayClick);
 
 //--------------------------------------------------------------------------------------//
 //                                   Cards                                              //
