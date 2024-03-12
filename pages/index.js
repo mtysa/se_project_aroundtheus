@@ -1,3 +1,5 @@
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -54,6 +56,23 @@ const imageCloseButton = document.querySelector("#image-close-button");
 const imagePreview = document.querySelector(".modal__image");
 
 //--------------------------------------------------------------------------------------//
+//                              Form Validation                                         //
+//--------------------------------------------------------------------------------------//
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormValidator = new FormValidator(config, profileEditform);
+editFormValidator.enableValidation();
+const addFormValidator = new FormValidator(config, cardAddForm);
+addFormValidator.enableValidation();
+
+//--------------------------------------------------------------------------------------//
 //                                      Functions                                       //
 //--------------------------------------------------------------------------------------//
 
@@ -67,31 +86,31 @@ function closePopup(modal) {
   document.removeEventListener("keydown", handleEscape);
 }
 
-function getCardElement(cardData) {
-  // clone the template element with all its content and store it in a cardElement variable
-  const cardElement = cardTemplate.cloneNode(true);
-  // access the card title and image and store them in variables
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  // card like button
-  const cardLikeButton = cardElement.querySelector("#card-like-button");
-  cardLikeButton.addEventListener("click", () =>
-    cardLikeButton.classList.toggle("card__like-button_active")
-  );
-  // card delete button
-  const cardDeleteButton = cardElement.querySelector("#card-delete-button");
-  cardDeleteButton.addEventListener("click", () => cardElement.remove());
-  // image preview
-  cardImageEl.addEventListener("click", () => loadImagePreview(cardData));
-  // set the path to the image to the link field of the object
-  cardImageEl.src = cardData.link;
-  // set the image alt text to the name field of the object
-  cardImageEl.alt = cardData.name;
-  // set the card title to the name field of the object, too
-  cardTitleEl.textContent = cardData.name;
-  // return the ready HTML element with the filled-in data
-  return cardElement;
-}
+// function getCardElement(cardData) {
+//   // clone the template element with all its content and store it in a cardElement variable
+//   const cardElement = cardTemplate.cloneNode(true);
+//   // access the card title and image and store them in variables
+//   const cardImageEl = cardElement.querySelector(".card__image");
+//   const cardTitleEl = cardElement.querySelector(".card__title");
+//   // card like button
+//   const cardLikeButton = cardElement.querySelector("#card-like-button");
+//   cardLikeButton.addEventListener("click", () =>
+//     cardLikeButton.classList.toggle("card__like-button_active")
+//   );
+//   // card delete button
+//   const cardDeleteButton = cardElement.querySelector("#card-delete-button");
+//   cardDeleteButton.addEventListener("click", () => cardElement.remove());
+//   // image preview
+//   cardImageEl.addEventListener("click", () => handleImageClick(cardData));
+//   // set the path to the image to the link field of the object
+//   cardImageEl.src = cardData.link;
+//   // set the image alt text to the name field of the object
+//   cardImageEl.alt = cardData.name;
+//   // set the card title to the name field of the object, too
+//   cardTitleEl.textContent = cardData.name;
+//   // return the ready HTML element with the filled-in data
+//   return cardElement;
+// }
 
 function fillProfileForm() {
   profileTitleInput.value = profileTitle.textContent;
@@ -103,17 +122,11 @@ function openEditProfileModal() {
   openPopup(profileEditModal);
 }
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-}
+// function renderCard(cardData) {
+//   const cardElement = getCardElement(cardData);
+//   cardListEl.prepend(cardElement);
+// }
 
-function loadImagePreview(previewData) {
-  imagePreview.src = previewData.link;
-  imageTitle.textContent = previewData.name;
-  imagePreview.alt = previewData.name;
-  openPopup(imagePreviewModal);
-}
 //--------------------------------------------------------------------------------------//
 //                                    Event Handlers                                    //
 //--------------------------------------------------------------------------------------//
@@ -141,11 +154,12 @@ function handleEscape(e) {
   }
 }
 
-// function handleAwayClick(e) {
-//   if (e.target === e.currentTarget) {
-//     closePopup(e.currentTarget);
-//   }
-// }
+function handleImageClick(previewData) {
+  imagePreview.src = previewData.link;
+  imageTitle.textContent = previewData.name;
+  imagePreview.alt = previewData.name;
+  openPopup(imagePreviewModal);
+}
 
 //--------------------------------------------------------------------------------------//
 //                                   Event Listeners                                    //
@@ -155,7 +169,10 @@ profileEditButton.addEventListener("click", openEditProfileModal);
 
 profileEditform.addEventListener("submit", handleProfileEditSubmit);
 
-cardAddButton.addEventListener("click", () => openPopup(cardAddModal));
+cardAddButton.addEventListener("click", () => {
+  openPopup(cardAddModal);
+  addFormValidator._toggleButtonState();
+});
 
 cardAddForm.addEventListener("submit", handleCardAddSubmit);
 
@@ -177,3 +194,13 @@ popups.forEach((popup) => {
 //--------------------------------------------------------------------------------------//
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+function createCard(cardData) {
+  const card = new Card(cardData, cardTemplate, handleImageClick);
+  return card.getView();
+}
+
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  cardListEl.prepend(cardElement);
+}
