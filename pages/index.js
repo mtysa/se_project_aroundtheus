@@ -86,32 +86,6 @@ function closePopup(modal) {
   document.removeEventListener("keydown", handleEscape);
 }
 
-// function getCardElement(cardData) {
-//   // clone the template element with all its content and store it in a cardElement variable
-//   const cardElement = cardTemplate.cloneNode(true);
-//   // access the card title and image and store them in variables
-//   const cardImageEl = cardElement.querySelector(".card__image");
-//   const cardTitleEl = cardElement.querySelector(".card__title");
-//   // card like button
-//   const cardLikeButton = cardElement.querySelector("#card-like-button");
-//   cardLikeButton.addEventListener("click", () =>
-//     cardLikeButton.classList.toggle("card__like-button_active")
-//   );
-//   // card delete button
-//   const cardDeleteButton = cardElement.querySelector("#card-delete-button");
-//   cardDeleteButton.addEventListener("click", () => cardElement.remove());
-//   // image preview
-//   cardImageEl.addEventListener("click", () => handleImageClick(cardData));
-//   // set the path to the image to the link field of the object
-//   cardImageEl.src = cardData.link;
-//   // set the image alt text to the name field of the object
-//   cardImageEl.alt = cardData.name;
-//   // set the card title to the name field of the object, too
-//   cardTitleEl.textContent = cardData.name;
-//   // return the ready HTML element with the filled-in data
-//   return cardElement;
-// }
-
 function fillProfileForm() {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -121,11 +95,6 @@ function openEditProfileModal() {
   fillProfileForm();
   openPopup(profileEditModal);
 }
-
-// function renderCard(cardData) {
-//   const cardElement = getCardElement(cardData);
-//   cardListEl.prepend(cardElement);
-// }
 
 //--------------------------------------------------------------------------------------//
 //                                    Event Handlers                                    //
@@ -171,7 +140,7 @@ profileEditform.addEventListener("submit", handleProfileEditSubmit);
 
 cardAddButton.addEventListener("click", () => {
   openPopup(cardAddModal);
-  addFormValidator._toggleButtonState();
+  addFormValidator.toggleButtonState();
 });
 
 cardAddForm.addEventListener("submit", handleCardAddSubmit);
