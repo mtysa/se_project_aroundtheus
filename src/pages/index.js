@@ -36,10 +36,10 @@ const userInfo = new UserInfo({
   jobSelector: ".profile__description",
 });
 
-function handleProfileEditSubmit() {
+function handleProfileEditSubmit(inputValues) {
   userInfo.setUserInfo({
-    name: profileTitleInput.value,
-    job: profileDescriptionInput.value,
+    name: inputValues.title,
+    job: inputValues.description,
   });
   profileEditPopup.close();
 }
@@ -87,9 +87,9 @@ const cardAddPopup = new PopupWithForm(
 );
 cardAddPopup.setEventListeners();
 
-function handleCardAddSubmit() {
-  const name = cardTitleInput.value;
-  const link = cardImageInput.value;
+function handleCardAddSubmit(inputValues) {
+  const name = inputValues.title;
+  const link = inputValues.description;
   renderCard({ name, link }, cardListEl);
   cardAddForm.reset();
   cardAddPopup.close();
