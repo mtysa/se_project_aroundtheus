@@ -19,8 +19,6 @@ import {
   cardTemplate,
   cardAddButton,
   cardAddForm,
-  cardTitleInput,
-  cardImageInput,
   config,
 } from "../utils/constants.js";
 

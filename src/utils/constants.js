@@ -38,8 +38,6 @@ export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 export const cardAddButton = document.querySelector(".profile__add-button");
 export const cardAddForm = document.querySelector("#card-add-form");
-export const cardTitleInput = document.querySelector("#card-title-input");
-export const cardImageInput = document.querySelector("#card-image-input");
 
 export const config = {
   formSelector: ".modal__form",
