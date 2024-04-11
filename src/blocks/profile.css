@@ -10,6 +10,15 @@
   border-radius: 50%;
   background-position: center;
   object-fit: cover;
+  position: relative;
+}
+
+.profile__image-button:hover {
+  opacity: 20%;
+  cursor: pointer;
+  background-image: url(../images/edit-icon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .profile__info {
