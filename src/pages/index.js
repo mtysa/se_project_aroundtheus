@@ -42,9 +42,6 @@ const api = new Api({
 const editFormValidator = new FormValidator(config, profileEditform);
 editFormValidator.enableValidation();
 
-const avatarFormValidator = new FormValidator(config, profileImageForm);
-avatarFormValidator.enableValidation();
-
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
@@ -58,7 +55,7 @@ api
   .then((res) => {
     userInfo.setUserInfo({
       name: res.name,
-      description: res.about,
+      job: res.about,
     });
   })
   .catch((err) => {
@@ -92,6 +89,10 @@ profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
 });
 
+// Update User Avatar
+const avatarFormValidator = new FormValidator(config, profileImageForm);
+avatarFormValidator.enableValidation();
+
 const profileImagePopup = new PopupWithForm(
   {
     popupSelector: "#profile-image-edit-modal",
@@ -104,10 +105,19 @@ profileImageButton.addEventListener("click", () => {
   profileImagePopup.open();
 });
 
+// Issues updating avatar
+
 function handleProfilePicSubmit(inputValues) {
-  api.updateAvatar(inputValues.description).then((res) => {
-    userInfo.setUserAvatar({ link: inputValues.des });
-  });
+  api
+    .updateAvatar(inputValues.description)
+    .then(() => {
+      userInfo.setUserAvatar({
+        avatar: inputValues.description,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   profileImagePopup.close();
 }
 
