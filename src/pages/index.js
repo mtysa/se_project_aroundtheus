@@ -182,14 +182,8 @@ function handleCardAddSubmit(inputValues) {
   cardAddPopup.setButtonText("Saving...");
   api
     .addCard(inputValues.title, inputValues.description)
-    .then(() => {
-      renderCard(
-        {
-          name: inputValues.title,
-          link: inputValues.description,
-        },
-        cardListEl
-      );
+    .then((card) => {
+      renderCard(card, cardListEl);
     })
     .finally(() => {
       cardAddPopup.setButtonText("Save");

@@ -80,10 +80,6 @@ export default class Card {
     return this._id;
   }
 
-  getLikeStatus() {
-    return this._isLiked;
-  }
-
   deleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
