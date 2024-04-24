@@ -13,12 +13,29 @@
   position: relative;
 }
 
-.profile__image-button:hover {
-  opacity: 20%;
+.profile__container {
+  position: relative;
   cursor: pointer;
-  background-image: url(../images/edit-icon.svg);
-  background-position: center;
-  background-repeat: no-repeat;
+}
+
+.profile__container:hover .profile__image-button {
+  opacity: 1;
+}
+
+.profile__container:hover .profile__image {
+  opacity: 0.2;
+}
+
+.profile__image-button {
+  height: 26px;
+  width: 26px;
+  color: #fff;
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  opacity: 0;
 }
 
 .profile__info {

@@ -22,4 +22,8 @@ export default class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues());
     });
   }
+
+  setButtonText(buttonText) {
+    this._form.querySelector(".modal__button").textContent = buttonText;
+  }
 }

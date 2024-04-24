@@ -57,6 +57,7 @@ api
       name: res.name,
       job: res.about,
     });
+    userInfo.setUserAvatar({ avatar: res.avatar });
   })
   .catch((err) => {
     console.error(err);
@@ -65,6 +66,7 @@ api
 // Update User Info
 
 function handleProfileEditSubmit(inputValues) {
+  profileEditPopup.setButtonText("Saving...");
   api
     .updateUserInfo(inputValues.title, inputValues.description)
     .then(() => {
@@ -75,6 +77,9 @@ function handleProfileEditSubmit(inputValues) {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      profileEditPopup.setButtonText("Save");
     });
   profileEditPopup.close();
 }
@@ -105,20 +110,22 @@ profileImageButton.addEventListener("click", () => {
   profileImagePopup.open();
 });
 
-// Issues updating avatar
-
 function handleProfilePicSubmit(inputValues) {
+  profileImagePopup.setButtonText("Saving...");
   api
     .updateAvatar(inputValues.description)
     .then(() => {
-      userInfo.setUserAvatar({
-        avatar: inputValues.description,
-      });
+      userInfo.setUserAvatar({ avatar: inputValues.description });
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      profileImagePopup.setButtonText("Save");
     });
   profileImagePopup.close();
+  profileImageForm.reset();
+  avatarFormValidator.resetValidation();
 }
 
 //--------------------------------------------------------------------------------------//
@@ -172,15 +179,21 @@ const cardAddPopup = new PopupWithForm(
 cardAddPopup.setEventListeners();
 
 function handleCardAddSubmit(inputValues) {
-  api.addCard(inputValues.title, inputValues.description).then(() => {
-    renderCard(
-      {
-        name: inputValues.title,
-        link: inputValues.description,
-      },
-      cardListEl
-    );
-  });
+  cardAddPopup.setButtonText("Saving...");
+  api
+    .addCard(inputValues.title, inputValues.description)
+    .then(() => {
+      renderCard(
+        {
+          name: inputValues.title,
+          link: inputValues.description,
+        },
+        cardListEl
+      );
+    })
+    .finally(() => {
+      cardAddPopup.setButtonText("Save");
+    });
   cardAddForm.reset();
   cardAddPopup.close();
 }
@@ -215,15 +228,25 @@ cardDeletePopup.setEventListeners();
 
 // Card Likes
 function handleLikeClick(card) {
-  api.likeCard(card.getId()).then((res) => {
-    card.handleLikeButton(res.isLiked);
-  });
+  api
+    .likeCard(card.getId())
+    .then((res) => {
+      card.handleLikeButton(res.isLiked);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 function handleUnlikeClick(card) {
-  api.unlikeCard(card.getId()).then((res) => {
-    card.handleUnlikeButton(!res.isLiked);
-  });
+  api
+    .unlikeCard(card.getId())
+    .then((res) => {
+      card.handleUnlikeButton(!res.isLiked);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 //--------------------------------------------------------------------------------------//

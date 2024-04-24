@@ -31,6 +31,10 @@ export default class Card {
     this._cardDeleteButton = this._cardElement.querySelector(
       "#card-delete-button"
     );
+    // like status
+    this._isLiked
+      ? this._cardLikeButton.classList.add("card__like-button_active")
+      : this._cardLikeButton.classList.remove("card__like-button_active");
     // set the path to the image to the link field of the object
     this.cardImageEl.src = this._link;
     // set the image alt text to the name field of the object
@@ -74,6 +78,10 @@ export default class Card {
 
   getId() {
     return this._id;
+  }
+
+  getLikeStatus() {
+    return this._isLiked;
   }
 
   deleteCard() {

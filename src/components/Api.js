@@ -46,6 +46,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
+      "Content-Type": "application/json",
     }).then(this._checkRes);
   }
 
@@ -53,6 +54,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this.headers,
+      "Content-Type": "application/json",
     }).then(this._checkRes);
   }
 
@@ -60,6 +62,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,
+      "Content-Type": "application/json",
     }).then(this._checkRes);
   }
 
