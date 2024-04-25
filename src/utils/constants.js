@@ -14,6 +14,10 @@ export const profileImageButton = document.querySelector(
 export const profileImageForm = document.querySelector(
   "#profile-image-edit-form"
 );
+export const profileTitleInput = document.querySelector("#profile-title-input");
+export const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
 export const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",

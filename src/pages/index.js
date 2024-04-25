@@ -21,6 +21,8 @@ import {
   config,
   profileImageButton,
   profileImageForm,
+  profileTitleInput,
+  profileDescriptionInput,
 } from "../utils/constants.js";
 
 //--------------------------------------------------------------------------------------//
@@ -50,6 +52,13 @@ const userInfo = new UserInfo({
 
 // Get User Info
 
+profileEditButton.addEventListener("click", () => {
+  profileEditPopup.open();
+  const { name, job } = userInfo.getUserInfo();
+  profileTitleInput.value = name;
+  profileDescriptionInput.value = job;
+});
+
 api
   .getUserInfo()
   .then((res) => {
@@ -74,6 +83,7 @@ function handleProfileEditSubmit(inputValues) {
         name: inputValues.title,
         job: inputValues.description,
       });
+      profileEditPopup.close();
     })
     .catch((err) => {
       console.error(err);
@@ -81,7 +91,6 @@ function handleProfileEditSubmit(inputValues) {
     .finally(() => {
       profileEditPopup.setButtonText("Save");
     });
-  profileEditPopup.close();
 }
 
 const profileEditPopup = new PopupWithForm(
@@ -89,10 +98,6 @@ const profileEditPopup = new PopupWithForm(
   handleProfileEditSubmit
 );
 profileEditPopup.setEventListeners();
-
-profileEditButton.addEventListener("click", () => {
-  profileEditPopup.open();
-});
 
 // Update User Avatar
 const avatarFormValidator = new FormValidator(config, profileImageForm);
@@ -116,6 +121,9 @@ function handleProfilePicSubmit(inputValues) {
     .updateAvatar(inputValues.description)
     .then(() => {
       userInfo.setUserAvatar({ avatar: inputValues.description });
+      profileImagePopup.close();
+      profileImageForm.reset();
+      avatarFormValidator.resetValidation();
     })
     .catch((err) => {
       console.error(err);
@@ -123,9 +131,6 @@ function handleProfilePicSubmit(inputValues) {
     .finally(() => {
       profileImagePopup.setButtonText("Save");
     });
-  profileImagePopup.close();
-  profileImageForm.reset();
-  avatarFormValidator.resetValidation();
 }
 
 //--------------------------------------------------------------------------------------//
@@ -184,12 +189,12 @@ function handleCardAddSubmit(inputValues) {
     .addCard(inputValues.title, inputValues.description)
     .then((card) => {
       renderCard(card, cardListEl);
+      cardAddPopup.close();
+      cardAddForm.reset();
     })
     .finally(() => {
       cardAddPopup.setButtonText("Save");
     });
-  cardAddForm.reset();
-  cardAddPopup.close();
 }
 
 cardAddButton.addEventListener("click", () => {
