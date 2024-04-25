@@ -10,6 +10,32 @@
   border-radius: 50%;
   background-position: center;
   object-fit: cover;
+  position: relative;
+}
+
+.profile__container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile__container:hover .profile__image-button {
+  opacity: 1;
+}
+
+.profile__container:hover .profile__image {
+  opacity: 0.2;
+}
+
+.profile__image-button {
+  height: 26px;
+  width: 26px;
+  color: #fff;
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  opacity: 0;
 }
 
 .profile__info {
